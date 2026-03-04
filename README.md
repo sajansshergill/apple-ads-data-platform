@@ -137,5 +137,43 @@ Supports:
 - Failure alerts
 
 ## 📈 Monitoring & Reliability
+Implemented checks:
+- Row count drift detection
+- Null rate validation
+- Late event watermark tracking
+- Partition completeness validation
 
+Simulates Datadog-style observability.
+
+## 🚀 How to Run
+1️⃣ Start Infrastructure
+docker-compose up -d
+
+2️⃣ Generate Ad Events
+python data_generator/generate_events.py
+
+3️⃣ Start Streaming Job
+spark-submit streaming/spark_streaming_job.py
+
+4️⃣ Run Airflow
+airflow standalone
+
+## 📊 Example Query
+SELECT
+  campaign_id,
+  SUM(clicks) / SUM(impressions) AS ctr,
+  SUM(installs) / SUM(clicks) AS cvr
+FROM feature_store_campaign_daily
+GROUP BY campaign_id
+ORDER BY ctr DESC;
+
+## 🧠 What This Project Proves
+This project demonstrates:
+- Distributed systems thinking
+- Advanced data modeling
+- Streaming + batch hybrid architecture
+- Lakehouse expertise (Iceberg)
+- Production reliability mindset
+- Privacy-aware data engineering
+- ML enablement architecture
 
